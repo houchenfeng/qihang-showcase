@@ -632,16 +632,11 @@
   </footer>
 
   <script>
-    // ===== Like System (GitHub Actions) =====
+    // ===== Like System =====
     var REPO_OWNER = 'houchenfeng';
     var REPO_NAME = 'qihang-showcase';
     var LIKES_FILE = 'likes.json';
     var RAW_URL = 'https://raw.githubusercontent.com/' + REPO_OWNER + '/' + REPO_NAME + '/master/' + LIKES_FILE;
-    var DISPATCH_URL = 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME + '/dispatches';
-    // Token split to bypass push protection
-    var _t1 = 'github_pat_11AVXIDUY089U4LY1rmYAZ_UWStBUcL4I';
-    var _t2 = 'xbkreOGMuKThEbLjt0CDNqJUpOhePCPS872LFZV7U1LvCq5cm';
-    var GITHUB_TOKEN = _t1 + _t2;
 
     var likesData = {};
     var likedKeys = JSON.parse(localStorage.getItem('liked_projects') || '{}');
@@ -681,21 +676,6 @@
       btn.classList.add('liked', 'pop');
       btn.querySelector('.like-icon').textContent = '♥';
       setTimeout(function() { btn.classList.remove('pop'); }, 350);
-
-      if (!GITHUB_TOKEN) return;
-
-      fetch(DISPATCH_URL, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'token ' + GITHUB_TOKEN,
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          event_type: 'like',
-          client_payload: { key: key }
-        })
-      }).catch(function() {});
     }
 
     // ===== Contact System =====
