@@ -57,7 +57,7 @@
 | | |
 |---|---|
 | **简介** | 面向大学生的个人日程与课表管理 Web App，今日总览 / 每周课表 / 日程待办三合一，打开即用、无需注册。 |
-| **链接** | [在线应用](https://schedule-cockpit-cmeodb2xs5q.qoder.zone) |
+| **链接** | [在线应用](https://schedule-cockpit-cmeodb2xs5q.qoder.zone) · [GitHub](https://github.com/panzhilin0116/my-schedule) |
 | **标签** | `Web` `校园工具` `日程管理` `课表` |
 
 ---
