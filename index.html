@@ -632,11 +632,13 @@
   </footer>
 
   <script>
-    // ===== Like System =====
+    // ===== Like System (GitHub Actions) =====
     var REPO_OWNER = 'houchenfeng';
     var REPO_NAME = 'qihang-showcase';
     var LIKES_FILE = 'likes.json';
     var RAW_URL = 'https://raw.githubusercontent.com/' + REPO_OWNER + '/' + REPO_NAME + '/master/' + LIKES_FILE;
+    var DISPATCH_URL = 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME + '/dispatches';
+    var LIKE_TOKEN = '__LIKE_TOKEN__';
 
     var likesData = {};
     var likedKeys = JSON.parse(localStorage.getItem('liked_projects') || '{}');
@@ -676,6 +678,21 @@
       btn.classList.add('liked', 'pop');
       btn.querySelector('.like-icon').textContent = '♥';
       setTimeout(function() { btn.classList.remove('pop'); }, 350);
+
+      if (!LIKE_TOKEN || LIKE_TOKEN === '__LIKE_TOKEN__') return;
+
+      fetch(DISPATCH_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'token ' + LIKE_TOKEN,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          event_type: 'like',
+          client_payload: { key: key }
+        })
+      }).catch(function() {});
     }
 
     // ===== Contact System =====
