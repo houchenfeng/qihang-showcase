@@ -363,6 +363,62 @@
     }
     .copied-toast.show { opacity: 1; }
 
+    /* ===== LIKE ===== */
+    .card-like {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .like-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 8px 14px;
+      background: var(--nb-white);
+      color: var(--nb-black);
+      border: 2px solid var(--nb-black);
+      box-shadow: 3px 3px 0 var(--nb-black);
+      cursor: pointer;
+      transition: all 0.12s ease;
+      opacity: 0.7;
+    }
+    .like-btn:hover {
+      opacity: 1;
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--nb-black);
+    }
+    .like-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 var(--nb-black);
+    }
+    .like-btn.liked {
+      opacity: 1;
+      background: var(--nb-pink);
+      color: var(--nb-white);
+    }
+    .like-btn.liked .like-icon {
+      color: var(--nb-white);
+    }
+    .like-icon {
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+    .like-btn.liked .like-icon {
+      transform: scale(1.2);
+    }
+    .like-btn.pop .like-icon {
+      animation: likePop 0.35s ease;
+    }
+    @keyframes likePop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5); }
+      100% { transform: scale(1.2); }
+    }
+
     /* ===== FOOTER ===== */
     .footer {
       border-top: var(--border-width) solid var(--nb-black);
@@ -448,6 +504,12 @@
             <a href="https://bark-game-7dexd8r5uqp.qoder.zone/" target="_blank" class="card-link">开始对战 →</a>
             <button class="contact-btn" onclick="event.stopPropagation();showContact('大狗叫叫叫','wechat','chenhj654321')">联系我</button>
           </div>
+          <div class="card-like">
+            <button class="like-btn" data-key="bark-game" onclick="event.stopPropagation();toggleLike(this)">
+              <span class="like-icon">♡</span>
+              <span class="like-count">0</span>
+            </button>
+          </div>
         </div>
       </article>
 
@@ -468,6 +530,12 @@
           <div class="card-actions">
             <a href="https://github.com/zjafb/BUAA-Hangzhou-Schedule" target="_blank" class="card-link">查看仓库 →</a>
             <button class="contact-btn" onclick="event.stopPropagation();showContact('BUAA-Hangzhou Schedule','qq','2678627677')">联系我</button>
+          </div>
+          <div class="card-like">
+            <button class="like-btn" data-key="buaa-schedule" onclick="event.stopPropagation();toggleLike(this)">
+              <span class="like-icon">♡</span>
+              <span class="like-count">0</span>
+            </button>
           </div>
         </div>
       </article>
@@ -491,6 +559,12 @@
             <a href="https://wcnmvy8hxv20.feishu.cn/wiki/W6wawJQ1aiiQXjkzQ6ec0i6Lnog" target="_blank" class="card-link">查看文档 →</a>
             <button class="contact-btn" onclick="event.stopPropagation();showContact('狐小A机器人','wechat','chenhj654321')">联系我</button>
           </div>
+          <div class="card-like">
+            <button class="like-btn" data-key="fox-a" onclick="event.stopPropagation();toggleLike(this)">
+              <span class="like-icon">♡</span>
+              <span class="like-count">0</span>
+            </button>
+          </div>
         </div>
       </article>
 
@@ -511,6 +585,12 @@
           <div class="card-actions">
             <a href="https://wcnmvy8hxv20.feishu.cn/wiki/Fq4aw5cJdifQbfkvlINcKAiDnQc" target="_blank" class="card-link">查看文档 →</a>
             <button class="contact-btn" onclick="event.stopPropagation();showContact('研途启航','wechat','chenhj654321')">联系我</button>
+          </div>
+          <div class="card-like">
+            <button class="like-btn" data-key="navivisor" onclick="event.stopPropagation();toggleLike(this)">
+              <span class="like-icon">♡</span>
+              <span class="like-count">0</span>
+            </button>
           </div>
         </div>
       </article>
@@ -533,6 +613,12 @@
           <div class="card-actions">
             <a href="https://schedule-cockpit-cmeodb2xs5q.qoder.zone" target="_blank" class="card-link">打开应用 →</a>
             <a href="https://github.com/panzhilin0116/my-schedule" target="_blank" class="card-link">GitHub →</a>
+          </div>
+          <div class="card-like">
+            <button class="like-btn" data-key="schedule-cockpit" onclick="event.stopPropagation();toggleLike(this)">
+              <span class="like-icon">♡</span>
+              <span class="like-count">0</span>
+            </button>
           </div>
         </div>
       </article>
@@ -559,6 +645,93 @@
   </footer>
 
   <script>
+    // ===== Like System (GitHub API) =====
+    // ⚠️ 需要配置 GitHub Personal Access Token
+    // 生成方式: GitHub Settings → Developer settings → Personal access tokens → Fine-grained tokens
+    // 权限: 只需 Contents (read & write) 对本仓库
+    var GITHUB_TOKEN = ''; // ← 在此填入你的 token
+    var REPO_OWNER = 'houchenfeng';
+    var REPO_NAME = 'qihang-showcase';
+    var LIKES_FILE = 'likes.json';
+    var API_BASE = 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME + '/contents/' + LIKES_FILE;
+
+    var likesData = {};
+    var fileSha = '';
+    var likedKeys = JSON.parse(localStorage.getItem('liked_projects') || '{}');
+
+    function loadLikes() {
+      if (!GITHUB_TOKEN) {
+        // 无 token 时使用 localStorage 模式
+        likesData = JSON.parse(localStorage.getItem('likes_data') || '{}');
+        applyLikes();
+        return;
+      }
+      fetch(API_BASE, { headers: { 'Authorization': 'token ' + GITHUB_TOKEN } })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.content) {
+            likesData = JSON.parse(atob(data.content.replace(/\n/g, '')));
+            fileSha = data.sha;
+          }
+          applyLikes();
+        })
+        .catch(function() { applyLikes(); });
+    }
+
+    function applyLikes() {
+      var btns = document.querySelectorAll('.like-btn');
+      btns.forEach(function(btn) {
+        var key = btn.getAttribute('data-key');
+        var count = likesData[key] || 0;
+        btn.querySelector('.like-count').textContent = count;
+        if (likedKeys[key]) {
+          btn.classList.add('liked');
+          btn.querySelector('.like-icon').textContent = '♥';
+        }
+      });
+    }
+
+    function toggleLike(btn) {
+      var key = btn.getAttribute('data-key');
+      if (likedKeys[key]) return; // 已点过赞
+
+      likedKeys[key] = true;
+      localStorage.setItem('liked_projects', JSON.stringify(likedKeys));
+
+      likesData[key] = (likesData[key] || 0) + 1;
+      btn.querySelector('.like-count').textContent = likesData[key];
+      btn.classList.add('liked', 'pop');
+      btn.querySelector('.like-icon').textContent = '♥';
+      setTimeout(function() { btn.classList.remove('pop'); }, 350);
+
+      // 无 token 时只存 localStorage
+      if (!GITHUB_TOKEN) {
+        localStorage.setItem('likes_data', JSON.stringify(likesData));
+        return;
+      }
+
+      // 通过 GitHub API 更新
+      var content = btoa(JSON.stringify(likesData, null, 2) + '\n');
+      fetch(API_BASE, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + GITHUB_TOKEN,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: 'like: +' + likesData[key] + ' for ' + key,
+          content: content,
+          sha: fileSha
+        })
+      }).then(function(r) {
+        if (r.ok) return r.json();
+        throw new Error('API error');
+      }).then(function(data) {
+        if (data && data.content) fileSha = data.content.sha;
+      }).catch(function() {});
+    }
+
+    // ===== Contact System =====
     function showContact(project, type, id) {
       document.getElementById('contactTitle').textContent = project + ' · 联系我';
       document.getElementById('contactLabel').textContent = type === 'qq' ? 'QQ' : '微信号';
@@ -579,6 +752,7 @@
         setTimeout(function() { toast.classList.remove('show'); }, 1500);
       });
     }
+    loadLikes();
   </script>
 </body>
 </html>

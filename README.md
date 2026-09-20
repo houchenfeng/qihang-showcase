@@ -106,3 +106,17 @@
 ## License
 
 本项目内容仅供学习交流使用。各项目的版权由原作者所有。
+
+---
+
+## 点赞功能
+
+每个项目卡片右下角有点赞按钮，点赞数据存储在仓库的 `likes.json` 文件中。
+
+**配置 GitHub Token（可选，不配置则使用 localStorage 模式）：**
+
+1. 打开 [GitHub Fine-grained tokens](https://github.com/settings/tokens?type=beta)
+2. 创建新 token，资源所有者选本仓库，权限勾选 **Contents → Read & write**
+3. 将 token 填入 `index.html` 中的 `GITHUB_TOKEN` 变量
+
+> 不配置 token 时，点赞数据仅存在浏览器本地（localStorage），不同用户看不到彼此的点赞。
