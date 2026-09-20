@@ -1,0 +1,44 @@
+name: Update Likes
+
+on:
+  repository_dispatch:
+    types: [like]
+
+permissions:
+  contents: write
+
+jobs:
+  update-likes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update likes.json
+        env:
+          PROJECT_KEY: ${{ github.event.client_payload.key }}
+        run: |
+          FILE="likes.json"
+          KEY="$PROJECT_KEY"
+
+          # Validate key (only allow known project keys)
+          case "$KEY" in
+            bark-game|buaa-schedule|fox-a|navivisor|schedule-cockpit) ;;
+            *) echo "Invalid key: $KEY"; exit 1 ;;
+          esac
+
+          # Read current count
+          COUNT=$(jq -r ".[\"$KEY\"] // 0" "$FILE")
+          NEW_COUNT=$((COUNT + 1))
+
+          # Update file
+          jq ".[\"$KEY\"] = $NEW_COUNT" "$FILE" > tmp.json && mv tmp.json "$FILE"
+
+          echo "Updated $KEY: $COUNT -> $NEW_COUNT"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add likes.json
+          git diff --cached --quiet || git commit -m "like: update ${{ github.event.client_payload.key }}"
+          git push
