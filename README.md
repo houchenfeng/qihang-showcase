@@ -52,7 +52,11 @@
 
 ## 如何提交你的项目
 
-如果你也是启航 AI 俱乐部的成员，欢迎通过 PR 提交你的项目！请在 `README.md` 中按以下格式添加：
+如果你也是启航 AI 俱乐部的成员，欢迎通过 PR 提交你的项目！
+
+### 1. 在 `README.md` 中添加项目信息
+
+按以下格式添加：
 
 ```markdown
 ### N. 项目名称
@@ -63,6 +67,28 @@
 | **链接** | [仓库/文档](URL) |
 | **标签** | `标签1` `标签2` |
 ```
+
+### 2. 在 `index.html` 中添加卡片
+
+复制现有卡片 HTML 模板，修改内容。卡片支持以下可选字段：
+
+- **Emoji / 图标**：卡片左上角的图标，可使用 emoji 或自定义图片。若使用图片，请将图片放入 `icons/` 目录，**尺寸限制 64×64px，文件大小不超过 50KB**，并用 `<img>` 标签替换 emoji：
+  ```html
+  <!-- 使用 emoji -->
+  <div class="card-emoji">🎮</div>
+  <!-- 使用图片图标 -->
+  <div class="card-emoji"><img src="icons/your-icon.png" width="48" height="48" alt="项目图标"></div>
+  ```
+
+- **联系方式**：如需展示「联系我」按钮，在卡片的 `card-actions` 中添加：
+  ```html
+  <button class="contact-btn" onclick="event.stopPropagation();showContact('你的项目名')">联系我</button>
+  ```
+  联系方式信息（微信号等）请在 PR 描述中告知维护者，由维护者统一配置。
+
+### 3. 提交 PR
+
+确保 `README.md` 和 `index.html` 同步更新，提交 Pull Request 即可。
 
 ---
 

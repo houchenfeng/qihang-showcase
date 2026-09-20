@@ -254,6 +254,114 @@
       box-shadow: 1px 1px 0 var(--nb-black);
     }
 
+    /* ===== CONTACT ===== */
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-self: flex-start;
+    }
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 13px;
+      padding: 12px 16px;
+      background: var(--nb-white);
+      color: var(--nb-black);
+      border: 3px solid var(--nb-black);
+      box-shadow: 4px 4px 0 var(--nb-black);
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+    .contact-btn:hover {
+      background: var(--nb-lavender);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--nb-black);
+    }
+    .contact-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--nb-black);
+    }
+    .contact-modal {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(26,26,26,0.55);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-modal.active { display: flex; }
+    .contact-box {
+      background: var(--nb-white);
+      border: var(--border-width) solid var(--nb-black);
+      box-shadow: 8px 8px 0 var(--nb-black);
+      padding: 32px;
+      max-width: 380px;
+      width: 90%;
+      text-align: center;
+    }
+    .contact-box h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .contact-box .wx-label {
+      font-size: 14px;
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+    .contact-box .wx-id {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      background: var(--nb-yellow);
+      border: 3px solid var(--nb-black);
+      padding: 12px 20px;
+      margin: 0 0 16px;
+      user-select: all;
+      cursor: pointer;
+    }
+    .contact-box .copy-hint {
+      font-size: 13px;
+      opacity: 0.5;
+      margin-bottom: 16px;
+    }
+    .contact-box .close-btn {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14px;
+      padding: 10px 24px;
+      background: var(--nb-black);
+      color: var(--nb-white);
+      border: 3px solid var(--nb-black);
+      box-shadow: 4px 4px 0 var(--nb-black);
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+    .contact-box .close-btn:hover {
+      background: var(--nb-pink);
+      color: var(--nb-black);
+    }
+    .copied-toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--nb-black);
+      color: var(--nb-yellow);
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14px;
+      padding: 10px 24px;
+      border: 3px solid var(--nb-yellow);
+      box-shadow: 4px 4px 0 var(--nb-yellow);
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .copied-toast.show { opacity: 1; }
+
     /* ===== FOOTER ===== */
     .footer {
       border-top: var(--border-width) solid var(--nb-black);
@@ -334,7 +442,10 @@
             <span class="tag">小游戏</span>
             <span class="tag">Web</span>
           </div>
-          <a href="https://bark-game-7dexd8r5uqp.qoder.zone/" target="_blank" class="card-link">开始对战 →</a>
+          <div class="card-actions">
+            <a href="https://bark-game-7dexd8r5uqp.qoder.zone/" target="_blank" class="card-link">开始对战 →</a>
+            <button class="contact-btn" onclick="event.stopPropagation();showContact('大狗叫叫叫')">联系我</button>
+          </div>
         </div>
       </article>
 
@@ -371,7 +482,10 @@
             <span class="tag">CBT</span>
             <span class="tag">桌宠</span>
           </div>
-          <a href="https://wcnmvy8hxv20.feishu.cn/wiki/W6wawJQ1aiiQXjkzQ6ec0i6Lnog" target="_blank" class="card-link">查看文档 →</a>
+          <div class="card-actions">
+            <a href="https://wcnmvy8hxv20.feishu.cn/wiki/W6wawJQ1aiiQXjkzQ6ec0i6Lnog" target="_blank" class="card-link">查看文档 →</a>
+            <button class="contact-btn" onclick="event.stopPropagation();showContact('狐小A机器人')">联系我</button>
+          </div>
         </div>
       </article>
 
@@ -389,12 +503,26 @@
             <span class="tag">科研</span>
             <span class="tag">Web</span>
           </div>
-          <a href="https://wcnmvy8hxv20.feishu.cn/wiki/Fq4aw5cJdifQbfkvlINcKAiDnQc" target="_blank" class="card-link">查看文档 →</a>
+          <div class="card-actions">
+            <a href="https://wcnmvy8hxv20.feishu.cn/wiki/Fq4aw5cJdifQbfkvlINcKAiDnQc" target="_blank" class="card-link">查看文档 →</a>
+            <button class="contact-btn" onclick="event.stopPropagation();showContact('研途启航')">联系我</button>
+          </div>
         </div>
       </article>
 
     </div>
   </main>
+
+  <div class="contact-modal" id="contactModal" onclick="closeContact(event)">
+    <div class="contact-box">
+      <h3 id="contactTitle">联系我</h3>
+      <p class="wx-label">微信号</p>
+      <div class="wx-id" id="wxId" onclick="copyWx()">chenhj654321</div>
+      <p class="copy-hint">点击微信号可复制</p>
+      <button class="close-btn" onclick="closeContact(event, true)">关闭</button>
+    </div>
+  </div>
+  <div class="copied-toast" id="copiedToast">已复制微信号！</div>
 
   <footer class="footer">
     <p>© 2026 启航 AI 俱乐部 · BUAA 杭州校区</p>
@@ -403,5 +531,24 @@
     </p>
   </footer>
 
+  <script>
+    function showContact(project) {
+      document.getElementById('contactTitle').textContent = project + ' · 联系我';
+      document.getElementById('contactModal').classList.add('active');
+    }
+    function closeContact(e, force) {
+      if (force || e.target === document.getElementById('contactModal')) {
+        document.getElementById('contactModal').classList.remove('active');
+      }
+    }
+    function copyWx() {
+      var wx = document.getElementById('wxId').textContent;
+      navigator.clipboard.writeText(wx).then(function() {
+        var toast = document.getElementById('copiedToast');
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 1500);
+      });
+    }
+  </script>
 </body>
 </html>
