@@ -1,0 +1,36 @@
+name: Daily Likes Boost
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # 每天 UTC 3:00 (北京时间 11:00)
+  workflow_dispatch:  # 支持手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  boost-likes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Boost likes randomly
+        run: |
+          FILE="likes.json"
+
+          # 为每个项目随机增加 1-10 个赞
+          for key in bark-game buaa-schedule fox-a navivisor schedule-cockpit; do
+            current=$(jq -r ".[\"$key\"] // 0" "$FILE")
+            boost=$(( (RANDOM % 10) + 1 ))
+            new=$(( current + boost ))
+            jq ".[\"$key\"] = $new" "$FILE" > tmp.json && mv tmp.json "$FILE"
+            echo "$key: $current + $boost = $new"
+          done
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add likes.json
+          git diff --cached --quiet || git commit -m "bot: daily likes boost"
+          git push
