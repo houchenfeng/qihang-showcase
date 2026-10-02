@@ -130,6 +130,32 @@
       white-space: nowrap;
     }
 
+    /* ===== SECTION DIVIDER ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 48px 0 40px;
+    }
+
+    .section-divider .line {
+      flex: 1;
+      height: 4px;
+      background: var(--nb-black);
+    }
+
+    .section-divider .label {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(14px, 2.5vw, 20px);
+      white-space: nowrap;
+      background: var(--nb-black);
+      color: var(--nb-white);
+      padding: 8px 20px;
+      border: 3px solid var(--nb-black);
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--nb-black);
+      text-align: center;
+    }
+
     /* ===== CARDS GRID ===== */
     .cards-grid {
       display: grid;
@@ -483,36 +509,11 @@
 
     <div class="cards-grid">
 
-      <!-- Card 1: 大狗叫叫叫 -->
-      <article class="card" onclick="window.open('https://bark-game-7dexd8r5uqp.qoder.zone/','_blank')">
-        <div class="card-accent yellow"></div>
-        <div class="card-top">
-          <div class="card-emoji">🐶</div>
-          <h3 class="card-title">大狗叫叫叫</h3>
-        </div>
-        <div class="card-body">
-          <p class="card-desc">语音对战小游戏——吼得越猛，赢得越狠！用你的嗓门决出谁是狗王之王。支持实时对战、狗王排行榜和练习模式。</p>
-          <div class="card-tags">
-            <span class="tag">语音对战</span>
-            <span class="tag">小游戏</span>
-            <span class="tag">Web</span>
-          </div>
-          <div class="card-actions">
-            <a href="https://bark-game-7dexd8r5uqp.qoder.zone/" target="_blank" class="card-link">开始对战 →</a>
-            <button class="contact-btn" onclick="event.stopPropagation();showContact('大狗叫叫叫','wechat','chenhj654321')">联系我</button>
-            <button class="like-btn" data-key="bark-game" onclick="event.stopPropagation();toggleLike(this)">
-              <span class="like-icon">♡</span>
-              <span class="like-count">0</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 2: BUAA-Hangzhou-Schedule -->
+      <!-- Card 1: BUAA-Hangzhou-Schedule -->
       <article class="card" onclick="window.open('https://github.com/zjafb/BUAA-Hangzhou-Schedule','_blank')">
         <div class="card-accent green"></div>
         <div class="card-top">
-          <div class="card-emoji">📱</div>
+          <div class="card-emoji"></div>
           <h3 class="card-title">BUAA-Hangzhou Schedule</h3>
         </div>
         <div class="card-body">
@@ -533,11 +534,11 @@
         </div>
       </article>
 
-      <!-- Card 3: 狐小A机器人 -->
+      <!-- Card 2: 狐小A机器人 -->
       <article class="card" onclick="window.open('https://wcnmvy8hxv20.feishu.cn/wiki/W6wawJQ1aiiQXjkzQ6ec0i6Lnog','_blank')">
         <div class="card-accent blue"></div>
         <div class="card-top">
-          <div class="card-emoji">🤖</div>
+          <div class="card-emoji"></div>
           <h3 class="card-title">狐小A机器人</h3>
         </div>
         <div class="card-body">
@@ -559,11 +560,11 @@
         </div>
       </article>
 
-      <!-- Card 4: Navivisor -->
+      <!-- Card 3: Navivisor -->
       <article class="card" onclick="window.open('https://wcnmvy8hxv20.feishu.cn/wiki/Fq4aw5cJdifQbfkvlINcKAiDnQc','_blank')">
         <div class="card-accent pink"></div>
         <div class="card-top">
-          <div class="card-emoji">🔬</div>
+          <div class="card-emoji"></div>
           <h3 class="card-title">Navivisor · 研途启航</h3>
         </div>
         <div class="card-body">
@@ -584,11 +585,46 @@
         </div>
       </article>
 
+    </div>
+
+    <div class="section-divider">
+      <div class="line"></div>
+      <div class="label">VibeCoding 讲座第一期 · 零基础教学</div>
+      <div class="line"></div>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- Card 4: 大狗叫叫叫 -->
+      <article class="card" onclick="window.open('https://bark-game-7dexd8r5uqp.qoder.zone/','_blank')">
+        <div class="card-accent yellow"></div>
+        <div class="card-top">
+          <div class="card-emoji"></div>
+          <h3 class="card-title">大狗叫叫叫</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">语音对战小游戏——吼得越猛，赢得越狠！用你的嗓门决出谁是狗王之王。支持实时对战、狗王排行榜和练习模式。</p>
+          <div class="card-tags">
+            <span class="tag">语音对战</span>
+            <span class="tag">小游戏</span>
+            <span class="tag">Web</span>
+          </div>
+          <div class="card-actions">
+            <a href="https://bark-game-7dexd8r5uqp.qoder.zone/" target="_blank" class="card-link">开始对战 →</a>
+            <button class="contact-btn" onclick="event.stopPropagation();showContact('大狗叫叫叫','wechat','chenhj654321')">联系我</button>
+            <button class="like-btn" data-key="bark-game" onclick="event.stopPropagation();toggleLike(this)">
+              <span class="like-icon">♡</span>
+              <span class="like-count">0</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
       <!-- Card 5: 日程任务舱 -->
       <article class="card" onclick="window.open('https://schedule-cockpit-cmeodb2xs5q.qoder.zone','_blank')">
         <div class="card-accent purple"></div>
         <div class="card-top">
-          <div class="card-emoji">🗓️</div>
+          <div class="card-emoji"></div>
           <h3 class="card-title">日程任务舱</h3>
         </div>
         <div class="card-body">
@@ -614,7 +650,7 @@
       <article class="card" onclick="window.open('https://github.com/Auguste13243546/lit-reader-local-ai','_blank')">
         <div class="card-accent yellow"></div>
         <div class="card-top">
-          <div class="card-emoji">📖</div>
+          <div class="card-emoji"></div>
           <h3 class="card-title">LitReader · 本地 AI 阅读助手</h3>
         </div>
         <div class="card-body">
