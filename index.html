@@ -161,9 +161,11 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 24px;
+      justify-content: start;
     }
 
     .card {
+      max-width: 560px;
       border: var(--border-width) solid var(--nb-black);
       box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--nb-black);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
