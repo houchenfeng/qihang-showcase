@@ -25,11 +25,11 @@ jobs:
           fi
 
           if [ "$tracker_date" != "$TODAY" ]; then
-            echo '{"date":"'"$TODAY"'","bark-game":0,"buaa-schedule":0,"fox-a":0,"navivisor":0,"schedule-cockpit":0}' > "$TRACKER"
+            echo '{"date":"'"$TODAY"'","bark-game":0,"buaa-schedule":0,"fox-a":0,"navivisor":0,"schedule-cockpit":0,"lit-reader":0,"thunder-fighter":0}' > "$TRACKER"
           fi
 
           changed=false
-          for key in bark-game buaa-schedule fox-a navivisor schedule-cockpit; do
+          for key in bark-game buaa-schedule fox-a navivisor schedule-cockpit lit-reader thunder-fighter; do
             today_count=$(jq -r ".[\"$key\"] // 0" "$TRACKER")
             if [ "$today_count" -ge "$CAP" ]; then
               echo "$key: daily cap reached ($today_count/$CAP)"
