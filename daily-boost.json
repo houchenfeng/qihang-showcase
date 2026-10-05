@@ -1,11 +1,11 @@
 {
   "date": "2026-10-05",
   "bark-game": 0,
-  "buaa-schedule": 0,
+  "buaa-schedule": 1,
   "fox-a": 0,
-  "navivisor": 0,
-  "schedule-cockpit": 1,
-  "lit-reader": 4,
-  "thunder-fighter": 1,
-  "pi-sparkle": 1
+  "navivisor": 2,
+  "schedule-cockpit": 4,
+  "lit-reader": 5,
+  "thunder-fighter": 2,
+  "pi-sparkle": 3
 }
