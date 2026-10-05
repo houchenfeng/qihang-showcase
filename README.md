@@ -52,7 +52,15 @@
 | **链接** | [飞书文档](https://wcnmvy8hxv20.feishu.cn/wiki/Fq4aw5cJdifQbfkvlINcKAiDnQc) |
 | **标签** | `AI Agent` `科研` `Web` |
 
-### 5. 日程任务舱
+### 5. FaultEvolve · 研途启航v2
+
+| | |
+|---|---|
+| **简介** | 基于大模型 Agent 的器件故障预测算法自演化系统，以 Skill 为入口，在「云端生成、本地评估」模式下通过假设树搜索与知识发现自动进化故障预测算法。 |
+| **链接** | [GitHub](https://github.com/houchenfeng/FaultEvolve-ResearchAssistant) |
+| **标签** | `AI Agent` `科研` `故障预测` |
+
+### 6. 日程任务舱
 
 | | |
 |---|---|
