@@ -70,6 +70,38 @@
 
 ---
 
+### 7. 我的日程（My Schedule）
+
+| | |
+|---|---|
+| **简介** | 面向大学生的离线优先个人日程管理应用，课表导入、战役计划、调休标记、四套主题与开屏动画，开箱即用并提供安卓 APK。 |
+| **链接** | [在线应用](https://my-schedule-akzzfsdx3vh.qoder.zone/) · [GitHub](https://github.com/Jacques-Jin/My-Schedule) |
+| **标签** | `校园工具` `日程管理` `Web` `Android` |
+
+---
+
+### 8. AI 后端入门手册
+
+| | |
+|---|---|
+| **简介** | 面向零基础新手的 AI 后端 / 大模型应用开发术语词典与方法论（VitePress）。 |
+| **链接** | [GitHub](https://github.com/wl-cloud/ai-backend-guide) |
+| **标签** | `AI` `Web` |
+
+---
+
+## AI 圆桌会第二期 · AIGC 本地创作
+
+### 9. AIGC 本地部署 · 图像生成
+
+| | |
+|---|---|
+| **简介** | 在本地部署大模型进行 AI 创作，从图像到视频一应俱全（建议 N 卡 8GB 显存以上，科学上网环境操作，模型建议在 Hugging Face 下载最新版）。 |
+| **链接** | [ComfyUI Portable](https://github.com/YanWenKun/ComfyUI-Windows-Portable) · [人像模型及工作流](https://pan.quark.cn/s/67f2d9ffd9ac?pwd=y3dp#) · [图像模型及工作流](https://pan.quark.cn/s/c70504e2c561) |
+| **标签** | `AIGC` `本地部署` `ComfyUI` |
+
+---
+
 ## 如何提交你的项目
 
 如果你也是启航 AI 俱乐部的成员，欢迎提交你的项目！有两种方式：
